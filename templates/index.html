@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BURGUER HOUSE</title>
+    <link rel="icon" type="image/png" href="/imagenes/favicon.png" />
+    <link rel="stylesheet" href="/static/styles.css?v={{ cache_buster }}" />
+</head>
+<body>
+    <section class="inicio">
+        <img class="inicio-fondo" src="/imagenes/fondo_logo.png" alt="Fondo de bienvenida">
+        <div class="contenido">
+            <h1 id="saludo-usuario">¡Bienvenido a Burger House!</h1>
+            <button type="button">Ver Menú</button>
+        </div>
+    </section>
+
+    <section id="menu" class="menu-oculto">
+        <header class="menu-presentacion">
+            <h2>En Burger House tenemos algo para cada antojo</h2>
+            <p>Hamburguesas, perros, salchipapas y mucho más para disfrutar.</p>
+        </header>
+        <div class="tarjetas-container">
+            <div class="tarjeta" data-tipo="combos" role="button" tabindex="0" aria-pressed="false"><img src="/imagenes/combos_house.png" alt="Combos"><h3>Combos</h3><p>Todo en uno, a mejor precio</p><p>Plato principal, acompañamiento y bebida con descuento.</p></div>
+            <div class="tarjeta" data-tipo="hamburguesas" role="button" tabindex="0" aria-pressed="false"><img src="/imagenes/burguer_house.png" alt="Hamburguesa clásica"><h3>Hamburguesas</h3><p>El clásico que nunca falla</p><p>Jugosas, crocantes y llenas de sabor.</p></div>
+            <div class="tarjeta" data-tipo="perros" role="button" tabindex="0" aria-pressed="false"><img src="/imagenes/perros_house.png" alt="Perros"><h3>Perros</h3><p>Sabor callejero en cada bocado</p><p>Clásicos, rellenos y perfectos para cualquier momento.</p></div>
+            <div class="tarjeta" data-tipo="salchipapas" role="button" tabindex="0" aria-pressed="false"><img src="/imagenes/salchipapas_house.png" alt="Salchipapas"><h3>Salchipapas</h3><p>La combinación más irresistible</p><p>Papas crocantes, salchicha y salsas de la casa.</p></div>
+            <div class="tarjeta" data-tipo="bebidas" role="button" tabindex="0" aria-pressed="false"><img src="/imagenes/bebidas_house.png" alt="Bebidas"><h3>Bebidas</h3><p>Refrescantes y perfectas para complementar tu pedido</p><p>Gaseosas y bebidas frías para acompañar tu comida.</p></div>
+            <div class="tarjeta" data-tipo="sandwich" role="button" tabindex="0" aria-pressed="false"><img src="/imagenes/sandwich_house.png" alt="Sandwich"><h3>Sandwich</h3><p>Suave, abundante y preparado al momento</p><p>Pan, carne, queso y vegetales frescos.</p></div>
+            <div class="tarjeta" data-tipo="acompañamientos" role="button" tabindex="0" aria-pressed="false"><img src="/imagenes/acompanamientos_house.png" alt="Acompañamientos"><h3>Acompañamientos</h3><p>El complemento ideal para tu pedido</p><p>Papas, aros de cebolla, nuggets, alitas y más.</p></div>
+            <div class="tarjeta" data-tipo="picadas" role="button" tabindex="0" aria-pressed="false"><img src="/imagenes/picadas_house.png" alt="Picadas"><h3>Picadas</h3><p>Para compartir en buena compañía</p><p>Una mezcla para disfrutar entre varios.</p></div>
+        </div>
+
+        <div id="imagenes-productos" hidden>
+            <img data-producto="🍔Clásica" src="/imagenes/hamburguesa_clasica_1.png" alt="🍔 Hamburguesa clásica">
+            <img data-producto="🧀 Cheeseburger" src="/imagenes/doble_carne_10.png" alt="🧀 Cheeseburger">
+            <img data-producto="🥓 Bacon" src="/imagenes/doble_bacon_11.png" alt="🥓 Bacon">
+            <img data-producto="🍍 Hawaiana" src="/imagenes/hawaiana_4.png" alt="🍍 Hawaiana">
+        </div>
+
+        <div class="seleccionar">
+            <p>Elige qué deseas ordenar</p>
+            <div class="botones-seleccion">
+                <button class="btn-seleccion" data-tipo="combos">Combos</button>
+                <button class="btn-seleccion activo" data-tipo="hamburguesas">Hamburguesas</button>
+                <button class="btn-seleccion" data-tipo="perros">Perros</button>
+                <button class="btn-seleccion" data-tipo="salchipapas">Salchipapas</button>
+                <button class="btn-seleccion" data-tipo="bebidas">Bebidas</button>
+                <button class="btn-seleccion" data-tipo="sandwich">Sandwich</button>
+                <button class="btn-seleccion" data-tipo="acompañamientos">Acompañamientos</button>
+                <button class="btn-seleccion" data-tipo="picadas">Picadas</button>
+            </div>
+        </div>
+
+        <div class="productos">
+            <h2 id="titulo-producto">Hamburguesas</h2>
+            <div id="lista-hamburguesas" class="lista-hamburguesas"></div>
+            <div id="producto-detalle" class="producto-detalle" hidden></div>
+        </div>
+    </section>
+
+    <aside class="carrito oculto" id="carrito">
+        <h3>Mi pedido</h3>
+        <div id="carrito-items" class="carrito-items"><p class="carrito-vacio">Tu carrito está vacío.</p></div>
+        <div class="carrito-total"><span>Total:</span><strong id="total-carrito">$0</strong></div>
+        <button class="btn-pagar" id="btn-pagar">Confirmar pedido</button>
+    </aside>
+
+    <dialog id="registro-dialog">
+        <form id="registro-form" method="dialog">
+            <h3>Regístrate para comenzar</h3>
+            <p>Usaremos estos datos guardados en este dispositivo para agilizar tus próximos pedidos.</p>
+            <label for="registro-nombre">Nombre</label>
+            <input id="registro-nombre" name="nombre" type="text" maxlength="80" autocomplete="name" required>
+            <label for="registro-telefono">Teléfono</label>
+            <input id="registro-telefono" name="telefono" type="text" inputmode="numeric" pattern="[0-9]{7,15}" minlength="7" maxlength="15" autocomplete="tel" required>
+            <div class="cliente-acciones"><button type="submit">Continuar</button></div>
+        </form>
+    </dialog>
+
+    <dialog id="cliente-dialog">
+        <form id="cliente-form" method="dialog">
+            <h3>Datos de entrega</h3>
+            <div id="resumen-pedido" class="resumen-pedido" aria-live="polite"></div>
+            <label for="cliente-nombre">Nombre</label>
+            <input id="cliente-nombre" name="nombre" type="text" maxlength="80" autocomplete="name" required>
+            <label for="cliente-telefono">Teléfono</label>
+            <input id="cliente-telefono" name="telefono" type="text" inputmode="numeric" pattern="[0-9]{7,15}" minlength="7" maxlength="15" autocomplete="tel" required>
+            <label for="cliente-direccion">Dirección</label>
+            <input id="cliente-direccion" name="direccion" type="text" minlength="5" maxlength="200" autocomplete="street-address" required>
+            <div class="cliente-acciones"><button type="button" id="cancelar-pedido">Cancelar</button><button type="submit">Confirmar pedido</button></div>
+        </form>
+    </dialog>
+
+    <section class="seguimiento-pedido oculto" id="seguimiento-pedido" aria-labelledby="seguimiento-titulo">
+        <h2 id="seguimiento-titulo">Ver estado de mi pedido</h2>
+        <p>Consulta el estado con el número de pedido y el teléfono registrado.</p>
+        <form id="seguimiento-form">
+            <input id="seguimiento-id" type="number" min="1" placeholder="Número de pedido" required>
+            <input id="seguimiento-telefono" type="text" inputmode="numeric" pattern="[0-9]+" maxlength="15" placeholder="Teléfono" required>
+            <button type="submit">Consultar estado</button>
+        </form>
+        <div id="resultado-seguimiento" class="resultado-seguimiento" aria-live="polite"></div>
+    </section>
+
+    <div id="mensaje-pedido" class="mensaje-pedido" role="status" aria-live="polite"></div>
+    <script src="/index.js?v={{ cache_buster }}" defer></script>
+</body>
+</html>

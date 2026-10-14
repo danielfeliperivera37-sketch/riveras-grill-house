@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de pedidos | Burger House</title>
+    <link rel="icon" type="image/png" href="/imagenes/favicon.png">
+    <link rel="stylesheet" href="/static/styles.css?v={{ cache_buster }}">
+</head>
+<body class="admin-body">
+    <section class="admin-login" id="admin-login">
+        <p class="admin-kicker">BURGER HOUSE</p>
+        <h1>Acceso administrativo</h1>
+        <p>Ingresa la contraseña para ver los pedidos.</p>
+        <form id="admin-login-form">
+            <label for="admin-password">Contraseña</label>
+            <input id="admin-password" type="password" autocomplete="current-password" required>
+            <button type="submit">Entrar</button>
+            <p id="admin-login-error" class="admin-login-error" role="alert"></p>
+        </form>
+    </section>
+
+    <main class="admin-panel oculto" id="admin-panel">
+        <header class="admin-header">
+            <div>
+                <p class="admin-kicker">BURGER HOUSE</p>
+                <h1>Pedidos recientes</h1>
+                <p>Revisa los pedidos y actualiza su estado desde aquí.</p>
+            </div>
+            <div class="admin-actions">
+                <button class="admin-refresh" id="actualizar-pedidos" type="button">Actualizar pedidos</button>
+                <button class="admin-logout" id="admin-logout" type="button">Cerrar sesión</button>
+            </div>
+        </header>
+        <nav class="admin-tabs" aria-label="Secciones del panel">
+            <button type="button" class="admin-tab activo" data-vista="pedidos">Pedidos</button>
+            <button type="button" class="admin-tab" data-vista="precios">Modificar precios</button>
+            <button type="button" class="admin-tab" data-vista="agregar">Agregar comida</button>
+        </nav>
+        <div id="admin-mensaje" class="admin-mensaje" role="status" aria-live="polite"></div>
+        <div id="vista-pedidos">
+            <section id="lista-pedidos" class="lista-pedidos" aria-live="polite"></section>
+        </div>
+        <div id="vista-precios" hidden>
+            <input id="precios-buscar" class="precios-buscar" type="search" placeholder="Buscar producto..." aria-label="Buscar producto">
+            <section id="lista-precios" class="lista-precios"></section>
+        </div>
+        <div id="vista-agregar" hidden>
+            <form id="form-agregar" class="agregar-form">
+                <label class="subir-imagen" for="nuevo-imagen">
+                    <img id="nuevo-preview" alt="" hidden>
+                    <span id="nuevo-subir-texto"><strong>Agregar imagen</strong><small>JPG, PNG o WEBP · máx. 3 MB</small></span>
+                    <input id="nuevo-imagen" type="file" accept="image/jpeg,image/png,image/webp" required hidden>
+                </label>
+                <div class="agregar-campos">
+                    <label for="nuevo-nombre">Título</label>
+                    <input id="nuevo-nombre" type="text" minlength="2" maxlength="60" placeholder="Poner título" required>
+                    <label for="nuevo-categoria">Categoría</label>
+                    <select id="nuevo-categoria" required>
+                        <option value="hamburguesas">Hamburguesas</option>
+                        <option value="perros">Perros</option>
+                        <option value="salchipapas">Salchipapas</option>
+                        <option value="sandwich">Sandwich</option>
+                        <option value="acompanamientos">Acompañamientos</option>
+                        <option value="picadas">Picadas</option>
+                        <option value="bebidas">Bebidas</option>
+                        <option value="combos">Combos</option>
+                    </select>
+                    <label>Agregar ingredientes</label>
+                    <div id="ingredientes-campos" class="ingredientes-campos">
+                        <input type="text" maxlength="40" placeholder="Ingrediente 1" required>
+                        <input type="text" maxlength="40" placeholder="Ingrediente 2">
+                        <input type="text" maxlength="40" placeholder="Ingrediente 3">
+                        <input type="text" maxlength="40" placeholder="Ingrediente 4">
+                        <button type="button" id="mas-ingrediente" class="mas-ingrediente" aria-label="Agregar otro ingrediente">+</button>
+                    </div>
+                    <label for="nuevo-precio">Agregar precio</label>
+                    <input id="nuevo-precio" type="number" min="1000" max="500000" step="500" placeholder="Precio" required>
+                    <button type="submit" class="precio-guardar agregar-enviar">Agregar al menú</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="/admin.js?v={{ cache_buster }}" defer></script>
+</body>
+</html>

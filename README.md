@@ -11,8 +11,11 @@ Python, Flask, SQLite, HTML, CSS y JavaScript.
 - Panel de administración protegido con contraseña
 
 ## Ejecutar
+
+```
 pip install flask
 python app.py
+```
 
 Variables opcionales: BURGER_ADMIN_PASSWORD y BURGER_SECRET_KEY.
 
